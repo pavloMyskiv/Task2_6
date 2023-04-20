@@ -1,0 +1,20 @@
+.wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $background_color_lite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .grocery_bud {
+    margin: 5px;
+    padding: 15px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px $old_black;
+    background-color: $background_color_main;
+  }
+}
