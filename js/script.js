@@ -1,5 +1,6 @@
-import { renderItemsFromCookies } from './modules/renderItemsFromCookies.js';
-import { addItem} from './modules/createItems.js';
+/** @format */
+
+import { addItem, renderItemsFromCookies } from './modules/createItems.js';
 import { confirmItem } from './modules/confirmItem.js';
 import { deleteItem } from './modules/deledeItem.js';
 import { cleanList } from './modules/clearItemList.js';
