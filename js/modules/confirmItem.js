@@ -1,28 +1,13 @@
-const setCookieValue = (key, value) => {
-  const expires = new Date(key + 24 * 60 * 60 * 1000);
+import { getCookieValue, setCookieValue } from './cookie.js';
 
-  value = JSON.stringify(value);
-  document.cookie = `${key}=${value}; expires=${expires.toUTCString()}; path=/`;
-};
+export const confirmItem = (button) => {
+  const id = button.dataset.itemId;
+  const itemBlock = document.getElementById(id);
 
-const getCookieValue = (key) => {
-  const cookies = document.cookie.split(';');
+  itemBlock.classList.toggle('confirm');
 
-  for (let i = 0; i < cookies.length; i++) {
-    const [cookieKey, cookieValue] = cookies[i].trim().split('=');
+  let newItemValue = getCookieValue(id);
+  newItemValue.confirm = itemBlock.classList.contains('confirm');
 
-    if (cookieKey == key) {
-      return JSON.parse(cookieValue);
-    }
-  }
-};
-
-export const confirmItem = (dataIds, button) => {
-  button.parentNode.classList.toggle('confirm');
-  const index = dataIds.findIndex((item) => item == button.parentNode.id);
-  let newItemValue = getCookieValue(dataIds[index]);
-  newItemValue.confirm = button.parentNode.classList.contains('confirm')
-    ? true
-    : false;
-  setCookieValue(dataIds[index], newItemValue);
+  setCookieValue(id, newItemValue);
 };

@@ -1,19 +1,13 @@
-const createItemCookies = (item) => {
-  const expires = new Date(item.id + 24 * 60 * 60 * 1000);
-  const cookieValue = JSON.stringify(item);
-  document.cookie = `${
-    item.id
-  }=${cookieValue}; expires=${expires.toUTCString()}; path=/`;
-};
+import { createItemCookies } from './cookie.js';
 
 const createItemHTML = (item) => {
   return `<div id="${item.id}" class="${item.confirm ? 'confirm' : ''}">
   <p>${item.text}</p>
-  <button class="confirm"></button>
-  <button class="delete"></button>`;
+  <button class="confirm" data-item-id="${item.id}"></button>
+  <button class="delete" data-item-id="${item.id}"></button>`;
 };
 
-export const addItem = (dataIds, list, text) => {
+export const addItem = (list, text) => {
   if (text.value) {
     const itemData = {
       id: Date.now(),
@@ -21,19 +15,17 @@ export const addItem = (dataIds, list, text) => {
       confirm: false,
     };
     list.insertAdjacentHTML('afterbegin', createItemHTML(itemData));
-    dataIds.push(itemData.id);
     createItemCookies(itemData);
   }
 };
 
-export const renderItemsFromCookies = (dataIds, list) => {
+export const renderItemsFromCookies = (list) => {
   const cookies = document.cookie.split(';');
   if (cookies[0] != '') {
     for (let i = 0; i < cookies.length; i++) {
       let [key, value] = cookies[i].trim().split('=');
       value = JSON.parse(value);
       list.insertAdjacentHTML('afterbegin', createItemHTML(value));
-      dataIds.push(value.id);
     }
   }
 };
