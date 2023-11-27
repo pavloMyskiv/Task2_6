@@ -1,0 +1,25 @@
+/** @format */
+
+@mixin default_border {
+  border-radius: 10px;
+  outline: 3px dashed $old_black;
+  outline-offset: 3px;
+}
+@mixin button {
+  background-color: $background_color_lite;
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: all 0.5s;
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+      background-color: $background_color_hard;
+      box-shadow: 2px 2px 5px $old_black;
+    }
+  }
+  @media (hover: none) {
+    background-color: $background_color_hard;
+    box-shadow: 2px 2px 5px $old_black;
+  }
+}
